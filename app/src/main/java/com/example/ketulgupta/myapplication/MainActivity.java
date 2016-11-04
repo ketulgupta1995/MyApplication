@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private long lastUpdate = 0;
     private float last_x, last_y, last_z;
     private static final int SHAKE_THRESHOLD = 600;
-    int  count=0;
+    int  count=0;int  to_and_fro=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,9 +103,14 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 float speed=Math.abs(x+y+z-last_x-last_y-last_z)/diff*10000;
                 if(speed>SHAKE_THRESHOLD)
                 {
-                    EditText editText=(EditText)findViewById(R.id.editText);
-                    editText.setText(Integer.toString(count));
-                    count++;
+                    to_and_fro+=1;
+                    if(to_and_fro==2)
+                    {
+                        EditText editText=(EditText)findViewById(R.id.editText);
+                        editText.setText(Integer.toString(count));
+                        count++;
+                        to_and_fro=0;
+                    }
                 }
                 last_x=x;
                 last_y=y;
