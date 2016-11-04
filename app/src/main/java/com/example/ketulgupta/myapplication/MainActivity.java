@@ -54,6 +54,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     public void endit(View view) {
         sensorManager.unregisterListener(this);
+        count=0;
+        to_and_fro=0;
+        lastUpdate=0;
+        EditText editText=(EditText)findViewById(R.id.editText);
+        editText.setText(Integer.toString(count));
+
     }
 
     protected void onPause() {
